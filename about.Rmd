@@ -1,5 +1,43 @@
 ---
-title: "about"
-output: html_document
+title: "About Me"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
 ---
 
+## Education
+**Columbia University, Mailman School of Public Health** — *New York, NY*  
+M.S. in Biostatistics, Pharmaceutical Statistics — Expected May 2027
+
+**University of Rochester** — *Rochester, NY*  
+B.S. in Data Science (Business Information Systems Track) — May 2025
+
+## Work Experience
+- Marketing Research and data analytics extern at Mobalytics,*Extern* (06/2024–07/2024)
+- Marketing Analytics Intern – *Shanghai Information2 Software Inc.* (06/2023–08/2023)
+- Wealth Management Analyst Intern – *Haitong Securities Co., Ltd* (05/2022–08/2022)
+
+## Research & Projects
+**Oligonucleotide Design for Northern Blot** — *Fu Lab, University of Rochester* (10/2024–Present)
+
+- Designed and optimized tRNA-targeted oligonucleotides using Python/R pipelines for sequence alignment and binding region identification. 
+
+**tRNA Methyltransferase 1 (TRMT1) Multi-Omics Analysis** — *Fu Lab, University of Rochester* (09/2024–08/2025)
+
+- Integrated RNA-seq, ribosome profiling, and proteomics data to study TRMT1-related translation regulation.
+- Applied linear models, enrichment tests, and clustering to identify hidden regulatory patterns.  
+
+**Statistical Analysis Plan for Clinical Trial** (02/2024–04/2024)
+
+- Designed a Statistical Analysis Plan (SAP) evaluating clinical efficacy and safety endpoints.  
+
+**Analyzing Cancer Treatment Effectiveness using R** (11/2023–02/2024)
+
+- Applied Kaplan–Meier survival analysis and Time-to-Response visualization for patient-level data. 
+
+## Skills
+- *Programming:* Python, R, SQL, SAS, Java  
+- *Data Visualization:* Tableau, Advanced Excel, R Markdown  
+- *Languages:* English (Professional), Chinese (Native)
