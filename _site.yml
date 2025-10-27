@@ -7,5 +7,13 @@ navbar:
       href: index.html
     - text: "About Me"
       href: about.html
+  right:
     - icon: fa-envelope fa-lg
       href: "mailto:xw3106@cumc.columbia.edu"
+    - icon: fa-github fa-lg
+      href: "https://github.com/W1nnieee"
+    - icon: fa-linkedin fa-lg
+      href: "https://www.linkedin.com/in/xinyu-wang-aa64ab225/"
+output:
+  html_document:
+    theme: cerulean
