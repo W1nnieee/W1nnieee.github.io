@@ -10,6 +10,7 @@ navbar:
   right:
     - icon: fa-envelope fa-lg
       href: "mailto:xw3106@cumc.columbia.edu"
+      html: true
     - icon: fa-github fa-lg
       href: "https://github.com/W1nnieee"
     - icon: fa-linkedin fa-lg
