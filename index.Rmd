@@ -6,10 +6,7 @@ output:
     toc_float: true
     theme: cerulean
 ---
-# Hi!
-My name is Xinyu Wang. Welcome to my personal website! 
 
----
 ## About me
 I am currently a MS Biostatistics student at Columbia University. My focus area is in data analytics of health data and clinical researches.
 This site provides an overview of my academic and professional experiences, projects, and ways to connect with me.
