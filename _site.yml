@@ -1,0 +1,9 @@
+name: "Xinyu's-website"
+output_dir: "."
+navbar:
+  title: "Xinyu Wang's Website"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About Me"
+      href: about.html
