@@ -117,7 +117,7 @@ prcp_temp = noaa_sample |>
     prcp = as.numeric(prcp),
     tavg = (tmax + tmin) / 2
   ) |>
-  filter(!is.na(prcp), !is.na(tavg), prcp > 0, prcp < 200)
+  filter(!is.na(prcp), !is.na(tavg), prcp > 0, prcp < 500)
 
 plot_ly(prcp_temp, x = ~tavg, y = ~prcp,
         type = "scatter", mode = "markers",
