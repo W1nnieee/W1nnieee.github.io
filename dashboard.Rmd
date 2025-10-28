@@ -2,9 +2,8 @@
 title: "NOAA Data Flex-Dashboard"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: rows
+    orientation: columns
     vertical_layout: fill
-runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
