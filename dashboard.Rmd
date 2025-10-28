@@ -1,0 +1,131 @@
+---
+title: "NOAA Data Flex-Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(plotly)
+library(dplyr)
+library(p8105.datasets)
+library(lubridate)
+
+#load data set
+data("ny_noaa")
+
+set.seed(123)
+
+noaa_sample = ny_noaa |>
+  filter(!is.na(tmax), !is.na(tmin), !is.na(prcp)) |> 
+  sample_n(3000) |>                                    
+  mutate(
+    year = year(date),
+    month = month(date)  
+  )
+```
+
+### Chart A
+
+```{r echo=FALSE}
+#finding monthly average for better plot visualization
+temp_monthly = noaa_sample |>
+  mutate(
+    tmax = as.numeric(tmax) / 10,
+    tmin = as.numeric(tmin) / 10,
+    year_month = floor_date(date, "month")
+  ) |>
+  group_by(year_month) |>
+  summarise(
+    avg_tmax = mean(tmax, na.rm = TRUE),
+    avg_tmin = mean(tmin, na.rm = TRUE)
+  )
+
+plot_ly(temp_monthly) |>
+  add_trace(
+    x = ~year_month, y = ~avg_tmax,
+    type = "scatter", mode = "lines",
+    name = "Avg Max Temp", line = list(color = "red")
+  ) |>
+  add_trace(
+    x = ~year_month, y = ~avg_tmin,
+    type = "scatter", mode = "lines",
+    name = "Avg Min Temp", line = list(color = "blue")
+  ) |>
+  layout(
+    title = "Monthly Average Max and Min Temperatures Over Time",
+    xaxis = list(title = "Date"),
+    yaxis = list(title = "Temperature (°C)")
+  )
+```
+
+### Chart B
+
+```{r echo=FALSE}
+winter_data <- noaa_sample |>
+  filter(month %in% c(11, 12, 1, 2, 3, 4))|>
+  mutate(
+    year = year(date),
+    month = month(date),
+    snow = as.numeric(snow),
+    snwd = as.numeric(snwd),
+    tmax = as.numeric(tmax) / 10,
+    tmin = as.numeric(tmin) / 10,
+    temp_avg = (tmax + tmin) / 2
+  ) 
+
+winter_summary <- winter_data |>
+  group_by(year) |>
+  summarise(
+    total_snow = sum(snow, na.rm = TRUE),     
+    avg_temp = mean(temp_avg, na.rm = TRUE)   
+  ) |>
+  filter(!is.na(year), total_snow > 0)
+
+plot_ly(winter_summary, x = ~year, y = ~total_snow, type = "bar",
+        name = "Total Snowfall (mm)", marker = list(color = "lightblue")) |>
+  add_trace(y = ~avg_temp, type = "scatter", mode = "lines+markers",
+            name = "Avg Temp (°C)",
+            line = list(color = "red", width = 2),
+            marker = list(color = "orange", size = 4),
+            yaxis = "y2") |>
+  layout(
+    title = "Winter (Nov–Apr) Snowfall and Average Temperature by Year",
+    xaxis = list(title = "Year"),
+    yaxis = list(title = "Total Snowfall (mm)"),
+    yaxis2 = list(
+      title = "Avg Temperature (°C)",
+      ticks = "outside",
+      overlaying = "y",
+      side = "right",
+      tickvals = seq(-10, 5, 5),
+      ticktext = seq(-10, 5, 5)
+    ),
+    legend = list(x = 0.05, y = 0.95)
+  )
+```
+
+### Chart C
+
+```{r echo=FALSE}
+prcp_temp = noaa_sample |>
+  mutate(
+    tmax = as.numeric(tmax) / 10,
+    tmin = as.numeric(tmin) / 10,
+    prcp = as.numeric(prcp),
+    tavg = (tmax + tmin) / 2
+  ) |>
+  filter(!is.na(prcp), !is.na(tavg), prcp > 0, prcp < 200)
+
+plot_ly(prcp_temp, x = ~tavg, y = ~prcp,
+        type = "scatter", mode = "markers",
+        marker = list(size = 6, opacity = 0.5, color = "darkblue")) |>
+  layout(
+    title = "Daily Precipitation vs Average Temperature",
+    xaxis = list(title = "Average Temperature (°C)"),
+    yaxis = list(title = "Precipitation (mm)")
+  )
+```
